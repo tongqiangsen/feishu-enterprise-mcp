@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# User credentials and tokens
+user_token.json
+*.credentials.json
+.google-credentials.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Test output
+coverage/
+.nyc_output/
+
+# Build files
+dist/
+build/
