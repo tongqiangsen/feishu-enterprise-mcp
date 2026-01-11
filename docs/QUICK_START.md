@@ -1,11 +1,11 @@
-# 飞书 MCP 服务器 - 快速操作指南
+﻿# 飞书 MCP 服务器 - 快速操作指南
 
 ## 📋 配置概览
 
 | 项目 | 值 |
 |------|-----|
-| 应用 ID | `cli_a9e9d88712f89cc6` |
-| MCP 目录 | `c:\Users\Administrator\.claude\feishu-enterprise-mcp\` |
+| 应用 ID | `your_app_id` |
+| MCP 目录 | `$USER_HOME\.claude\feishu-enterprise-mcp\` |
 | Token 文件 | `user_token.json` |
 | 认证服务器 | `auth_server.js` |
 | 故障排查指南 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) |
@@ -55,7 +55,7 @@
 遇到问题时，首先运行诊断脚本：
 
 ```bash
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -File scripts/diagnose.ps1
 ```
 
@@ -75,7 +75,7 @@ c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypas
 **解决方案**:
 ```bash
 # 1. 删除旧 token
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 rm user_token.json
 
 # 2. 重新授权
@@ -90,7 +90,7 @@ node auth_server.js
 
 **解决方案**:
 ```bash
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 node auth_server.js
 ```
 
@@ -126,7 +126,7 @@ localhost
 
 ```bash
 # 1. 进入目录
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 
 # 2. 删除旧 token（可选）
 rm user_token.json
@@ -150,13 +150,13 @@ http://localhost:3000
 
 ### 运行诊断脚本
 ```bash
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -File scripts/diagnose.ps1
 ```
 
 ### 查看 Token 信息
 ```bash
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 cat user_token.json
 ```
 

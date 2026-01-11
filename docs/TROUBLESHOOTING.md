@@ -1,11 +1,11 @@
-# 飞书 MCP 故障排查指南
+﻿# 飞书 MCP 故障排查指南
 
 ## 一键诊断（推荐首选）
 
 遇到问题时，首先运行诊断脚本：
 
 ```bash
-cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+cd $USER_HOME\.claude\feishu-enterprise-mcp
 c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -File diagnose.ps1
 ```
 
@@ -43,7 +43,7 @@ netstat -ano | findstr :3000
 
 1. **启动授权服务器**：
    ```bash
-   cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+   cd $USER_HOME\.claude\feishu-enterprise-mcp
    node auth_server.js
    ```
 
@@ -129,7 +129,7 @@ MCP 服务器的代码已修复（添加了 `useUserToken = true`），但需要
 
 2. **删除旧 Token 并重新授权**：
    ```bash
-   cd c:\Users\Administrator\.claude\feishu-enterprise-mcp
+   cd $USER_HOME\.claude\feishu-enterprise-mcp
    rm user_token.json
    node auth_server.js
    # 然后访问 http://localhost:3000 完成授权
@@ -207,7 +207,7 @@ redirect_uri 不合法
 **解决方案**：
 
 1. 访问 https://open.feishu.cn/app
-2. 找到应用：`cli_a9e9d88712f89cc6`
+2. 找到应用：`your_app_id`
 3. 进入「权限管理」→「安全设置」
 4. 添加重定向 URL：`http://localhost:3000/callback`
 5. 保存后刷新页面重试

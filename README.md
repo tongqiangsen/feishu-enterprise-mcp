@@ -1,4 +1,4 @@
-# 飞书企业级 MCP 服务器
+﻿# 飞书企业级 MCP 服务器
 
 > 基于 Model Context Protocol (MCP) 的飞书企业级集成服务
 
@@ -45,7 +45,7 @@ npm install
       "command": "node",
       "args": ["C:\Users\YourUsername\.claude\feishu-enterprise-mcp\index.js"],
       "env": {
-        "FEISHU_APP_ID": "cli_a9e9d88712f89cc6",
+        "FEISHU_APP_ID": "your_app_id",
         "FEISHU_APP_SECRET": "your_app_secret"
       }
     }
