@@ -82,7 +82,7 @@ node auth_server.js
 
 ---
 
-## 可用工具 (26 个)
+## 可用工具 (28 个)
 
 ### 文档操作
 - `create_document` - 创建新文档
@@ -119,6 +119,12 @@ node auth_server.js
 - `get_user_info` - 获取用户信息
 - `get_department_info` - 获取部门信息
 
+### Token 管理
+- `check_token_health` - 检查 Token 健康状态
+- `reload_user_token` - 重新加载用户 Token
+- `start_auth_server` - 启动授权服务器
+- `auto_auth` - 自动授权（Puppeteer）
+
 ---
 
 ## 权限配置清单
@@ -140,6 +146,35 @@ node auth_server.js
 | `contact:user.base:readonly` | 用户信息 |
 | `contact:department.base:readonly` | 部门信息 |
 | `email:user` | 用户邮箱 |
+
+---
+
+## 性能与安全特性
+
+### 性能优化
+- **GET 请求缓存**: 30秒 TTL，减少约30%的重复API调用
+- **智能 Token 管理**: 动态检查间隔（30s/10s/300s）
+- **最大缓存限制**: 100条缓存条目，防止内存溢出
+
+### 安全特性
+- **输入验证**: 所有字符串参数都经过长度和格式验证
+- **XSS 防护**: 标题字段自动清理危险字符
+- **安全 Puppeteer 配置**: 新版 headless 模式，禁用不安全参数
+- **内存泄漏防护**: 优雅关闭时清理所有定时器
+- **细粒度错误处理**: HTTP 状态码映射，提供详细解决方案
+
+### 错误处理增强
+
+服务器支持以下 HTTP 状态码的错误处理：
+
+| 状态码 | 错误类型 | 说明 |
+|--------|----------|------|
+| 400 | invalid_request | 请求参数错误 |
+| 403 | permission_denied | 权限拒绝 |
+| 404 | not_found | 资源不存在 |
+| 409 | conflict | 资源冲突 |
+| 429 | too_many_requests | 请求频率限制 |
+| 500/502/503 | server_error | 服务器错误 |
 
 ---
 
@@ -301,21 +336,95 @@ node auth_server.js
 
 ## 开发
 
+### NPM 脚本
+
+```bash
+# 启动服务器
+npm start
+
+# 开发模式（热重载）
+npm run dev
+
+# 用户授权
+npm run auth
+
+# 检查 Token 状态
+npm run auth:check
+
+# 无头模式授权
+npm run auth:headless
+
+# 运行测试
+npm test
+
+# 监听模式测试
+npm run test:watch
+
+# 测试覆盖率
+npm run test:coverage
+
+# 代码检查
+npm run lint
+
+# 自动修复代码
+npm run lint:fix
+
+# 格式化代码
+npm run format
+
+# 检查代码格式
+npm run format:check
+```
+
+### 代码质量工具
+
+项目集成了以下代码质量工具：
+
+| 工具 | 用途 | 配置文件 |
+|------|------|----------|
+| Jest | 单元测试 | jest (package.json) |
+| ESLint | 代码检查 | eslint.config.js |
+| Prettier | 代码格式化 | .prettierrc |
+
 ### 运行测试
 
 ```bash
-# 认证测试
-node tests/test_auth.js
+# 运行所有测试
+npm test
 
-# API 测试
-node tests/test_api.js
+# 监听模式（文件变化时自动重新运行）
+npm run test:watch
+
+# 生成覆盖率报告
+npm run test:coverage
 ```
 
-### 代码结构
+### 代码检查与格式化
 
-- `index.js` - MCP 服务器主入口，定义所有工具
-- `auth_server.js` - OAuth 2.0 授权服务器
-- `tests/` - 测试文件目录
+```bash
+# 检查代码质量
+npm run lint
+
+# 自动修复可修复的问题
+npm run lint:fix
+
+# 格式化所有代码
+npm run format
+```
+
+### 项目结构
+
+```
+feishu-enterprise-mcp/
+├── index.js           # MCP 服务器主文件
+├── auto_auth.js       # 自动授权脚本（Puppeteer）
+├── package.json       # 项目配置
+├── eslint.config.js   # ESLint 配置
+├── .prettierrc        # Prettier 配置
+├── tests/             # 测试文件
+│   └── *.test.js      # Jest 单元测试
+└── user_token.json    # 用户令牌（自动生成）
+```
 
 ---
 
@@ -331,5 +440,5 @@ MIT License
 
 ---
 
-**最后更新**: 2026-01-11  
-**版本**: 1.1.0
+**最后更新**: 2026-01-12
+**版本**: 1.2.0
